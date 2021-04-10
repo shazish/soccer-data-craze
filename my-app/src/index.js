@@ -1,12 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 
-class Square extends React.Component {  
+class Square extends React.Component {
   render() {
     return (
-      <button className="square"  onClick={ () => this.setState({value: 'X'})}>
-        {this.state.value}
+      // calls parent method
+      <button className="square" onClick={() => this.props.sqrOnClick()}>
+        {this.props.value}
       </button>
     );
   }
@@ -15,17 +16,40 @@ class Square extends React.Component {
     super(props);
     this.state = {
       value: null,
-    }
+    };
   }
 }
 
 class Board extends React.Component {
+  step = 0;
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+    };
+  }
+
   renderSquare(i) {
-    return <Square value={i} />;
+    return (
+      // pass method as a prop so that square can call it
+      // why not directly use onClick here instead of square
+
+      <Square
+        value={this.state.squares[i]}
+        sqrOnClick={() => this.handleClick(i)}
+      />
+    );
+  }
+
+  handleClick(i) {
+    this.step++;
+    let tempSquares = this.state.squares.slice();
+    tempSquares[i] = "X" + this.step;
+    this.setState({ squares: tempSquares });
   }
 
   render() {
-    const status = 'Next player: X';
+    const status = "Next player: X";
 
     return (
       <div>
@@ -68,7 +92,4 @@ class Game extends React.Component {
 
 // ========================================
 
-ReactDOM.render(
-  <Game />,
-  document.getElementById('root')
-);
+ReactDOM.render(<Game />, document.getElementById("root"));
