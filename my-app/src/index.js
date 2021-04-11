@@ -5,7 +5,11 @@ import "./index.css";
 // function components such as Square are stateless render-only components
 function Square(props) {
   return (
-    <button className="square" onClick={props.sqrOnClick}>
+    <button
+      className="square"
+      data-testid={`aa${props.index}`}
+      onClick={props.sqrOnClick}
+    >
       {props.value}
     </button>
   );
@@ -26,6 +30,7 @@ class Board extends React.Component {
       // why not directly use onClick here instead of square
 
       <Square
+        index={i}
         value={this.state.squares[i]}
         sqrOnClick={() => this.handleClick(i)}
       />
@@ -114,4 +119,6 @@ function calculateWinner(squares) {
 
 // ========================================
 
-ReactDOM.render(<Game />, document.getElementById("root"));
+// ReactDOM.render(<Game />, document.getElementById("root"));
+
+export default Game;
