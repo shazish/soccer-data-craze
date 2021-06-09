@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
 import './index.css';
-// https://reactjs.org/tutorial/tutorial.html#setup-for-the-tutorial
-// npm start
 
 class Square extends React.Component {  
   render() {
@@ -26,8 +23,6 @@ class Board extends React.Component {
   renderSquare(i) {
     return <Square value={i} />;
   }
-
-
 
   render() {
     const status = 'Next player: X';
@@ -68,15 +63,6 @@ class Game extends React.Component {
         </div>
       </div>
     );
-  }
-
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  fetchData() {
-    axios.get("https://fantasy.premierleague.com/api/bootstrap-static/", {mode: 'no-cors'})
-    .then(res => console.log(">", res)).catch(err => console.log(err));
   }
 }
 
