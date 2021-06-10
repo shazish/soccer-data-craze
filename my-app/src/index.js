@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import './index.css';
 
 class Square extends React.Component {  
@@ -66,9 +67,27 @@ class Game extends React.Component {
   }
 }
 
+
+class AppMain extends React.Component {
+  render() {
+    return (
+      <div className="app-container">
+          <Board />
+      </div>
+    );
+  }
+
+  fetchData() {
+    axios.get("https://fantasy.premierleague.com/api/bootstrap-static/", {mode: 'no-cors'})
+    .then(res => console.log(">", res)).catch(err => console.log(err));
+  }
+}
+
+
+
 // ========================================
 
 ReactDOM.render(
-  <Game />,
+  <AppMain />,
   document.getElementById('root')
 );
