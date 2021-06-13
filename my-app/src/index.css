@@ -1,3 +1,8 @@
+/* https: //tailwindcss.com/docs/guides/create-react-app */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
