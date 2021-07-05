@@ -7,6 +7,8 @@ import './index.css';
 // https://reactjs.org/tutorial/tutorial.html#setup-for-the-tutorial
 // npm star
 
+let teams = null;
+
 class Square extends React.Component {
   render() {
     return (
@@ -74,20 +76,21 @@ class Game extends React.Component {
 
 class AppMain extends React.Component {
   render() {
+    teams = "...";
     return (
       <div className="app-container">
         <div className="header-container">
-          <div class="row">
-            <div class="col-5">
+          <div className="row">
+            <div className="col-5">
               <h1>Soccer data craze.</h1>
             </div>
-            <div class="col-7">
+            <div className="col-7">
               <h4>Learn from the past and guess the final result. That includes the first half!</h4>
             </div>
           </div>
         </div>
         <div className="body-container">
-
+          teams: { this.state.teams?.toString() }
         </div>
         <div className="footer-container">
 
@@ -107,16 +110,26 @@ class AppMain extends React.Component {
   }
 
   fetchData() {
-    axios.get("https://fantasy.premierleague.com/api/bootstrap-static/", { mode: 'no-cors' })
-      .then(res => console.log(">", res)).catch(err => console.log(err));
+    return axios.get("https://fantasy.premierleague.com/api/bootstrap-static/", { mode: 'no-cors' })
+      .then(res => { 
+        console.log("res", res); this.data = res.data; 
+        this.setState({ teams: this.data.teams.map(d => d.name)});
+        console.log("teams: ", this.teams);
+      });
   }
 
   constructor(props) {
     super(props);
-    // this.state = {
-    //   value: null,
-    // }
+    let data;
+ 
+
+    this.state = {
+      value: null,
+      teams: null,
+    }
     this.fetchData();
+    console.log("data", this.data);
+
   }
 }
 
