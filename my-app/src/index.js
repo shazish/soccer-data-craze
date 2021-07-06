@@ -93,10 +93,9 @@ class AppMain extends React.Component {
           teams: { this.state.teams?.toString() }
         </div>
         <div className="footer-container">
-
         </div>
-        <Alert variant='primary' className="flex flex-row" >Zeresk behkhor</Alert>
-        <Board />
+        {/* <Alert variant='primary' className="flex flex-row" >Zeresk behkhor</Alert>
+        <Board /> */}
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
@@ -115,7 +114,8 @@ class AppMain extends React.Component {
         console.log("res", res); this.data = res.data; 
         this.setState({ teams: this.data.teams.map(d => d.name)});
         console.log("teams: ", this.teams);
-      });
+      })
+      .catch(err => console.error("error:" , err)); // catch cors errors
   }
 
   constructor(props) {
