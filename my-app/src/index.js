@@ -1,8 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
-import { Alert, Button } from 'react-bootstrap';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import axios from "axios";
+import App from "./App";
+import { Alert, Button } from "react-bootstrap";
+import "./index.css";
 
 // https://reactjs.org/tutorial/tutorial.html#setup-for-the-tutorial
 // npm star
@@ -12,7 +13,7 @@ let teams = null;
 class Square extends React.Component {
   render() {
     return (
-      <button className="square" onClick={() => this.setState({ value: 'X' })}>
+      <button className="square" onClick={() => this.setState({ value: "X" })}>
         {this.state.value}
       </button>
     );
@@ -22,7 +23,7 @@ class Square extends React.Component {
     super(props);
     this.state = {
       value: null,
-    }
+    };
   }
 }
 
@@ -32,7 +33,7 @@ class Board extends React.Component {
   }
 
   render() {
-    const status = 'Next player: X';
+    const status = "Next player: X";
 
     return (
       <div>
@@ -73,6 +74,18 @@ class Game extends React.Component {
   }
 }
 
+class Teams extends React.Component {
+  render() {
+    return <p>- {this.state.teamName}</p>;
+  }
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      teamName: 'a',
+    };
+  }
+}
 
 class AppMain extends React.Component {
   render() {
@@ -85,15 +98,20 @@ class AppMain extends React.Component {
               <h1>Soccer data craze.</h1>
             </div>
             <div className="col-7">
-              <h4>Learn from the past and guess the final result. That includes the first half!</h4>
+              <h4>
+                Learn from the past and guess the final result. That includes
+                the first half!
+              </h4>
             </div>
           </div>
         </div>
         <div className="body-container">
-          teams: { this.state.teams?.toString() }
+          Teams:{" "}
+          {this.state.teams?.map((el) => (
+            <Teams teamName={el} />
+          ))}
         </div>
-        <div className="footer-container">
-        </div>
+        <div className="footer-container"></div>
         {/* <Alert variant='primary' className="flex flex-row" >Zeresk behkhor</Alert>
         <Board /> */}
         <link
@@ -103,41 +121,36 @@ class AppMain extends React.Component {
           crossorigin="anonymous"
         />
       </div>
-
-
     );
   }
 
   fetchData() {
-    return axios.get("https://fantasy.premierleague.com/api/bootstrap-static/", { mode: 'no-cors' })
-      .then(res => { 
-        console.log("res", res); this.data = res.data; 
-        this.setState({ teams: this.data.teams.map(d => d.name)});
+    return axios
+      .get("https://fantasy.premierleague.com/api/bootstrap-static/", {
+        mode: "no-cors",
+      })
+      .then((res) => {
+        console.log("res", res);
+        this.data = res.data;
+        this.setState({ teams: this.data.teams.map((d) => d.name) });
         console.log("teams: ", this.teams);
       })
-      .catch(err => console.error("error:" , err)); // catch cors errors
+      .catch((err) => console.error("error:", err)); // catch cors errors
   }
 
   constructor(props) {
     super(props);
     let data;
- 
 
     this.state = {
       value: null,
       teams: null,
-    }
+    };
     this.fetchData();
     console.log("data", this.data);
-
   }
 }
 
-
-
 // ========================================
 
-ReactDOM.render(
-  <AppMain />,
-  document.getElementById('root')
-);
+ReactDOM.render(<App />, document.getElementById("root"));
