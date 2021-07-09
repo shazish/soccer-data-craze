@@ -28,9 +28,9 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app-container">
+      <div className="app-container p-4">
         <div className="header-container">
-          <div className="row">
+          <div className="grid row">
             <div className="col-5">
               <h1>Soccer data craze.</h1>
             </div>
@@ -43,10 +43,22 @@ class App extends React.Component {
           </div>
         </div>
         <div className="body-container">
-          <p>Teams length: {this.state.teamstate?.length}</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Team</th>
+              <th scope="col">Team abbr.</th>
+              <th scope="col">Strength</th>
+            </tr>
+          </thead>
+        <tbody>
           {this.state.teamstate?.map((el) => (
-            <TeamsMini teamName={el} />
+            <TeamsMini team={el} />
           ))}
+        </tbody>
+        </table>
+
+
         </div>
         <div className="footer-container"></div>
         {/* <Alert variant='primary' className="flex flex-row" >Zeresk behkhor</Alert>
@@ -70,7 +82,7 @@ class App extends React.Component {
       })
       .then((res) => {
         console.log("res.data: ", res.data);
-        teams = res.data.teams.map((d) => d.name)
+        teams = res.data.teams;
         // this.setState({ teams: this.data.teams.map((d) => d.name) });
         this.setState ({teamstate: teams});
         console.log("teams: ", teams);
