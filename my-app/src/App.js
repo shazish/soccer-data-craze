@@ -1,8 +1,10 @@
-import './App.css';
-import TeamsMini from './components/teamsMini';
+import React from "react";
+import "./App.css";
+import TeamsMini from "./components/teamsMini";
 import axios from "axios";
-import React from 'react';
 
+import HomePage from "./components/homePage";
+import Nav from "./components/nav";
 let teams = null;
 
 class App extends React.Component {
@@ -24,7 +26,6 @@ class App extends React.Component {
   //     </header>
   //   </div>
   // );
- 
 
   render() {
     return (
@@ -35,30 +36,25 @@ class App extends React.Component {
               <h1>Soccer data craze.</h1>
             </div>
             <div className="col-7">
-              <h4>
-                Learn from the past and guess the final result. That includes
-                the first half!
-              </h4>
+              <Nav />
             </div>
           </div>
         </div>
         <div className="body-container">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Team</th>
-              <th scope="col">Team abbr.</th>
-              <th scope="col">Strength</th>
-            </tr>
-          </thead>
-        <tbody>
-          {this.state.teamstate?.map((el) => (
-            <TeamsMini team={el} />
-          ))}
-        </tbody>
-        </table>
-
-
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Team</th>
+                <th scope="col">Team abbr.</th>
+                <th scope="col">Strength</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.teamstate?.map((el) => (
+                <TeamsMini team={el} />
+              ))}
+            </tbody>
+          </table>
         </div>
         <div className="footer-container"></div>
         {/* <Alert variant='primary' className="flex flex-row" >Zeresk behkhor</Alert>
@@ -71,7 +67,6 @@ class App extends React.Component {
         />
       </div>
     );
-  
   }
 
   fetchData = () => {
@@ -84,22 +79,19 @@ class App extends React.Component {
         console.log("res.data: ", res.data);
         teams = res.data.teams;
         // this.setState({ teams: this.data.teams.map((d) => d.name) });
-        this.setState ({teamstate: teams});
+        this.setState({ teamstate: teams });
         console.log("teams: ", teams);
 
         // teams = ['b'];
       })
       .catch((err) => console.error("error:", err)); // catch cors errors
-  }
+  };
 
   constructor(props) {
     super(props);
     this.state = {};
     this.fetchData();
   }
-
 }
-
-
 
 export default App;
