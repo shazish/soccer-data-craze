@@ -1,11 +1,17 @@
-import { Route } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 function Nav() {
   return (
-    <div className="nav-container">
-      <Route exact path="/" component="{HomePage}" />
-      <Route path="/login" component="{Login}" />
-    </div>
+    <nav className="nav-container">
+      <NavLink to="/" exact>
+        Home
+      </NavLink>
+      {" | "}
+      <NavLink to="/login" exact>
+        Login
+      </NavLink>
+    </nav>
   );
 }
 

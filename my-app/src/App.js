@@ -1,10 +1,12 @@
 import React from "react";
 import "./App.css";
-import TeamsMini from "./components/teamsMini";
-import axios from "axios";
 
+import { Route, Switch } from "react-router-dom";
+import axios from "axios";
 import HomePage from "./components/homePage";
+import Login from "./components/login";
 import Nav from "./components/nav";
+import notFound from "./components/404";
 let teams = null;
 
 class App extends React.Component {
@@ -40,22 +42,13 @@ class App extends React.Component {
             </div>
           </div>
         </div>
-        <div className="body-container">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Team</th>
-                <th scope="col">Team abbr.</th>
-                <th scope="col">Strength</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.teamstate?.map((el) => (
-                <TeamsMini team={el} />
-              ))}
-            </tbody>
-          </table>
-        </div>
+        {/* switch is needed so that once a valid route match is found, it no longer checks below routes */}
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route path="/login" component={Login} />
+          <Route component={notFound} />
+        </Switch>
+
         <div className="footer-container"></div>
         {/* <Alert variant='primary' className="flex flex-row" >Zeresk behkhor</Alert>
         <Board /> */}
