@@ -12,16 +12,8 @@ let teams = null;
 function App() {
   return (
     <div className="app-container p-4">
-      <div className="header-container">
-        <div className="grid row">
-          <div className="col-5">
-            <h1>Soccer data craze.</h1>
-          </div>
-          <div className="col-7">
-            <Nav />
-          </div>
-        </div>
-      </div>
+      <Nav />
+
       {/* switch is needed so that once a valid route match is found, it no longer checks below routes */}
       <Switch>
         <Route exact path="/" component={HomePage} />
