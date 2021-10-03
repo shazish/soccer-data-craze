@@ -1,4 +1,5 @@
 import React from "react";
+import teamsList from "./teamsList";
 import TeamsMini from "./teamsMini";
 
 let state = {};
@@ -15,9 +16,7 @@ function HomePage() {
           </tr>
         </thead>
         <tbody>
-          {state.teamstate?.map((el) => (
-            <TeamsMini team={el} />
-          ))}
+          <teamsList />
         </tbody>
       </table>
     </div>

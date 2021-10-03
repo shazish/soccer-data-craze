@@ -10,6 +10,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 // ========================================
 
 ReactDOM.render(
+  // <Provider store="this.props.store">
+
+  // </Provider>
   <Router>
     <App />
   </Router>,
