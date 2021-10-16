@@ -7,7 +7,7 @@ export function loadAuthorSuccess(authors) {
 
 // thunk: this signature adds dispatch as arg.
 // we no longer have to pass dispatch ourselves
-export function loadCourses() {
+export function loadAuthors() {
   return function (dispatch) {
     return authorApi
       .getAuthors()

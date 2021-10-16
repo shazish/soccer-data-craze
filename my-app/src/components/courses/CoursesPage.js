@@ -10,9 +10,6 @@ class CoursesPage extends React.Component {
     this.props.actions.loadCourses().catch((err) => {
       console.log("err", err);
     });
-    this.props.actions.loadAuthors().catch((err) => {
-      console.log("loadAuthors err", err);
-    });
   }
 
   render() {
@@ -39,8 +36,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     actions: {
-      loadCourses: bindActionCreators(courseActions, dispatch),
-      loadAuthors: bindActionCreators(authorActions, dispatch),
+      loadCourses: bindActionCreators(courseActions.loadCourses, dispatch),
+      loadAuthors: bindActionCreators(authorActions.loadAuthors, dispatch),
     },
   };
 }
