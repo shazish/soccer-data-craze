@@ -11,5 +11,5 @@ jobs:
       - run: npm install -g bats
       - run: bats -v
 
-- name: Setup Node.js environment
-  uses: actions/setup-node@v3.1.1
+name: Setup Node.js environment
+uses: actions/setup-node@v3.1.1
